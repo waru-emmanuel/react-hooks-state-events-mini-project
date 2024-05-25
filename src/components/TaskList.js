@@ -1,9 +1,24 @@
 import React from "react";
+import Task from "./Task";
+import { TASKS } from "../data";
 
-function TaskList() {
+
+function TaskList({tasks , setTasks}) {
+  const handleDelete = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
+
   return (
     <div className="tasks">
-      {/* display a list of tasks using Task component */}
+      {TASKS.map((task) =>(
+        <Task key={task.text} 
+              id={task.id} 
+              text={task.text} 
+              category={task.category}
+               onDelete={handleDelete} 
+          />
+      ))}
     </div>
   );
 }
